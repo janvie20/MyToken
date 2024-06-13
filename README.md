@@ -1,28 +1,52 @@
-// SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+MyToken Solidity Contract
+Overview
+This Solidity smart contract defines a basic token named "CONSTANT" with the abbreviation "CONST". The contract includes functionalities for minting new tokens and burning existing tokens, as well as maintaining a record of token balances for each address.
 
-contract MyToken {
+Contract Details
+Public Variables
+tokenName: The name of the token (set to "CONSTANT").
+tokenAbbrv: The abbreviation of the token (set to "CONST").
+totalSupply: The total supply of the tokens (initially set to 0).
+Mapping
+balances: A mapping from addresses to their respective token balances.
+Functions
+mint
+Increases the total supply of tokens and the balance of a specific address.
 
-    // Public variables for token details
-    string public tokenName = "CONSTANT";
-    string public tokenAbbrv = "CONST";
-    uint public totalSupply = 0;
+Parameters:
 
-    // Mapping to store balances of addresses
-    mapping(address => uint) public balances;
+_address (address): The address to which the tokens will be minted.
+_value (uint): The number of tokens to be minted.
+Functionality:
 
-    // Mint function to increase total supply and balance of a specific address
-    function mint(address _address, uint _value) public {
-        totalSupply += _value;
-        balances[_address] += _value;
-    }
+Increases totalSupply by _value.
+Increases the balance of _address by _value.
+burn
+Decreases the total supply of tokens and the balance of a specific address.
 
-    // Burn function to decrease total supply and balance of a specific address
-    function burn(address _address, uint _value) public {
-        // Check if the address has enough balance to burn
-        if (balances[_address] >= _value) {
-            totalSupply -= _value;
-            balances[_address] -= _value;
-        }
-    }
-}
+Parameters:
+
+_address (address): The address from which the tokens will be burned.
+_value (uint): The number of tokens to be burned.
+Functionality:
+
+Checks if _address has a balance greater than or equal to _value.
+If true, decreases totalSupply by _value.
+Decreases the balance of _address by _value.
+Usage
+Deploy the Contract: Deploy the MyToken contract on a Solidity-compatible blockchain.
+Mint Tokens: Call the mint function with the desired address and token amount to increase the total supply and the balance of the specified address.
+Burn Tokens: Call the burn function with the desired address and token amount to decrease the total supply and the balance of the specified address, ensuring the address has enough tokens to burn.
+Example
+solidity
+Copy code
+// Deploy the contract
+MyToken myToken = new MyToken();
+
+// Mint 100 tokens to an address
+myToken.mint(0x123..., 100);
+
+// Burn 50 tokens from the same address
+myToken.burn(0x123..., 50);
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
